@@ -1,1 +1,86 @@
 
+<!doctype html>
+<html lang='en'>
+    <head>
+        <title>CSE204 Assignment 7</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script src="function.js"></script>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="row">
+              <div class="col"><img src="1.jpg" alt="picture1" id="1"></div>
+              <div class="col"><img src="2.jpg" alt="picture2" id="2"></div>
+              <div class="col"><img src="3.jpg" alt="picture3" id="3"></div>
+            </div>
+            <div class="row">
+                <div class="col"><img src="4.jpg" alt="picture4" id="4"></div>
+                <div class="col"><img src="5.jpg" alt="picture5" id="5"></div>
+                <div class="col"><img src="6.jpg" alt="picture6" id="6"></div>
+            </div>
+            <div class="row">
+                <div class="col"><img src="7.jpg" alt="picture7" id="7"></div>
+                <div class="col"><img src="8.jpg" alt="picture8" id="8"></div>
+                <div class="col"><img src="9.jpg" alt="picture9" id="9"></div>
+            </div>
+            <div class="row">
+                <div class="col"><img src="10.jpg" alt="picture10" id="10"></div>
+                <div class="col"><img src="11.jpg" alt="picture11" id="11"></div>
+                <div class="col"><img src="12.jpg" alt="picture12" id="12"></div>
+            </div>
+          </div>
+
+          <button id="closeButton"> close</button>
+
+          <div id="bigPictDiv">
+            <img src="1.jpg" alt="bigPict" id="bigPict">
+            <button id="closeButton">Close</button>
+          </div>
+
+          <script>
+            function displayBigPict(pictIndex)
+            {
+              document.getElementById("bigPict").src = pictIndex + ".jpg";
+              document.getElementById("bigPictDiv").display = block;
+            }
+
+            function closePict()
+            {
+                document.getElementById("bigPictDiv").style.display = none;
+            }
+
+            function leftPict(currIndex)
+            {
+                if(currIndex > 1)
+                {
+                    document.getElementById("bigPict").src = (currIndex-1) + ".jpg";
+                }
+            }
+
+            function rightPict(currIndex)
+            {
+                if(currIndex < 12)
+                {
+                    document.getElementById("bigPict").src = (currIndex+1) + ".jpg";
+                }
+                
+            }
+            
+            function addPictFunc()
+            {
+              for(var i = 1; i <= 12; i++)
+              {
+                  document.getElementById(i.toString()).addEventListener('click', displayBigPict(i));
+              }
+            }
+
+            addPictFunc();
+            document.getElementById("closeButton").addEventListener('click', closePict);
+            document.getElementById("leftButton").addEventListener('click', leftPict);
+            document.getElementById("rightButton").addEventListener('click', rightPict);
+        </script>
+    </body>
+</html>
