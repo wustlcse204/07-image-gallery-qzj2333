@@ -6,65 +6,69 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="style.css">
-        <script src="function.js"></script>
     </head>
 
     <body>
-        <div class="container">
+        <div id="container">
             <div class="row">
               <div class="col"><img src="1.jpg" alt="picture1" id="1"></div>
               <div class="col"><img src="2.jpg" alt="picture2" id="2"></div>
               <div class="col"><img src="3.jpg" alt="picture3" id="3"></div>
+              <div class="col"><img src="4.jpg" alt="picture4" id="4"></div>
             </div>
             <div class="row">
-                <div class="col"><img src="4.jpg" alt="picture4" id="4"></div>
                 <div class="col"><img src="5.jpg" alt="picture5" id="5"></div>
                 <div class="col"><img src="6.jpg" alt="picture6" id="6"></div>
-            </div>
-            <div class="row">
                 <div class="col"><img src="7.jpg" alt="picture7" id="7"></div>
                 <div class="col"><img src="8.jpg" alt="picture8" id="8"></div>
-                <div class="col"><img src="9.jpg" alt="picture9" id="9"></div>
             </div>
             <div class="row">
+                <div class="col"><img src="9.jpg" alt="picture9" id="9"></div>
                 <div class="col"><img src="10.jpg" alt="picture10" id="10"></div>
                 <div class="col"><img src="11.jpg" alt="picture11" id="11"></div>
                 <div class="col"><img src="12.jpg" alt="picture12" id="12"></div>
             </div>
-          </div>
-
-          <button id="closeButton"> close</button>
+        </div>
 
           <div id="bigPictDiv">
-            <img src="1.jpg" alt="bigPict" id="bigPict">
-            <button id="closeButton">Close</button>
+            <div id="pictDiv"><img src="1.jpg" alt="bigPict" id="bigPict"></div>
+            <div id="buttonDiv">
+                <span class="spanLeft"><button id="leftButton">&#8592</button></span>
+                <span class="spanLeft"><button id="rightButton">&#8594</button></span>
+                <span class="spanRight"><button id="closeButton">close</button></span>
+            </div>
           </div>
 
           <script>
-            function displayBigPict(pictIndex)
+            var currIndex = 0;
+
+            function displayBigPict()
             {
-              document.getElementById("bigPict").src = pictIndex + ".jpg";
-              document.getElementById("bigPictDiv").display = block;
+              document.getElementById("bigPict").src = event.target.id + ".jpg";
+              document.getElementById("bigPictDiv").style.display = "block";
+              document.getElementById("container").style.opacity = "0.3";
+              currIndex = event.target.id;
             }
 
             function closePict()
             {
-                document.getElementById("bigPictDiv").style.display = none;
+                document.getElementById("bigPictDiv").style.display = "none";
+                document.getElementById("container").style.opacity = "1";
             }
 
-            function leftPict(currIndex)
+            function leftPict()
             {
                 if(currIndex > 1)
                 {
-                    document.getElementById("bigPict").src = (currIndex-1) + ".jpg";
+                    document.getElementById("bigPict").src = (--currIndex) + ".jpg";
                 }
             }
 
-            function rightPict(currIndex)
+            function rightPict()
             {
                 if(currIndex < 12)
                 {
-                    document.getElementById("bigPict").src = (currIndex+1) + ".jpg";
+                    document.getElementById("bigPict").src = (++currIndex) + ".jpg";
                 }
                 
             }
@@ -73,14 +77,26 @@
             {
               for(var i = 1; i <= 12; i++)
               {
-                  document.getElementById(i.toString()).addEventListener('click', displayBigPict(i));
+                  document.getElementById(i.toString()).addEventListener('click', function()
+                  {
+                      displayBigPict();
+                  });
               }
             }
 
             addPictFunc();
-            document.getElementById("closeButton").addEventListener('click', closePict);
-            document.getElementById("leftButton").addEventListener('click', leftPict);
-            document.getElementById("rightButton").addEventListener('click', rightPict);
+            document.getElementById("closeButton").addEventListener('click', function()
+            {
+                closePict();
+            });
+            document.getElementById("leftButton").addEventListener('click', function()
+            {
+                leftPict();
+            });
+            document.getElementById("rightButton").addEventListener('click', function()
+            {
+                rightPict();
+            });
         </script>
     </body>
 </html>
